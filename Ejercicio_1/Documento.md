@@ -16,6 +16,8 @@ Para verificar que Python esté instalado correctamente, ejecuta:
 ```powershell
 python --version
 ```
+<img width="573" height="42" alt="image" src="https://github.com/user-attachments/assets/66c00ac7-d568-48ac-b950-bc12dff305d3" />
+
 
 ## 🪜 Pasos para crear un entorno virtual
 
@@ -45,6 +47,7 @@ Esto creará una carpeta llamada:
 ```
 venv/
 ```
+<img width="360" height="235" alt="image" src="https://github.com/user-attachments/assets/78db9213-0bc9-4cfd-afff-dfa25381574a" />
 
 En esta carpeta se guardan Python y las librerías del proyecto.
 
@@ -77,6 +80,7 @@ Ejemplo de instalación:
 ```powershell
 pip install numpy
 ```
+<img width="641" height="172" alt="image" src="https://github.com/user-attachments/assets/efcf2a48-37a6-4bbf-aa92-9bd1ac5b6cd9" />
 
 ---
 
@@ -92,6 +96,7 @@ import numpy as np
 numeros = np.array([1, 2, 3])
 print(numeros)
 ```
+<img width="486" height="386" alt="image" src="https://github.com/user-attachments/assets/d3336b21-f521-4dc8-9ff9-b4e549ac03da" />
 
 Para ejecutar el archivo:
 
