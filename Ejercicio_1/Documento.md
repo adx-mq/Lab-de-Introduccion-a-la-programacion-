@@ -92,8 +92,7 @@ Ejemplo de archivo Python:
 
 ```python
 import numpy as np
-
-numeros = np.array([1, 2, 3])
+= np.
 print(numeros)
 ```
 <img width="486" height="386" alt="image" src="https://github.com/user-attachments/assets/d3336b21-f521-4dc8-9ff9-b4e549ac03da" />
