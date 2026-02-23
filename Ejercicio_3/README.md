@@ -12,6 +12,14 @@ El programa valida que:
 
 Este sistema demuestra el uso correcto de estructuras de control y validaciones en Python de forma clara y organizada.
 
+- Variables usadas.
+- Ciclo `while`  
+- Ciclo `for`  
+- Condicionales `if` y `elif`  
+- Operadores lógicos (`and`, `or`, `not`)  
+- Funciones `input()`, `print()`, `len()`, `isdigit()`, `chr()`  
+- Control de flujo con `break`  
+
 ---
 ---
 
@@ -97,14 +105,6 @@ print("Acceso denegado. Intentos restantes:", 3 - intentos)
 ```
 
 Se muestra cuántos intentos restantes quedan disponibles.
-
-- Variables  
-- Ciclo `while`  
-- Ciclo `for`  
-- Condicionales `if` y `elif`  
-- Operadores lógicos (`and`, `or`, `not`)  
-- Funciones `input()`, `print()`, `len()`, `isdigit()`, `chr()`  
-- Control de flujo con `break`  
 
 ---
 ---
