@@ -46,4 +46,3 @@ while (intentos<3):
             acceso=2
             if acceso==2:
                 break 
-
