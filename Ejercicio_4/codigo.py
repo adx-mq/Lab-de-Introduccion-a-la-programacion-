@@ -23,3 +23,4 @@ while (intentos<3):
     elif usuario == "admin" and password == "Admin2026":
         print("Acceso permitido") 
         acceso = 1
+        
