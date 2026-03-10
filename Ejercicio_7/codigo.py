@@ -1,4 +1,4 @@
-ntentos=0
+intentos=0
 
 def clasificar_numero():
     print("clasificar número ")
@@ -135,10 +135,10 @@ while (intentos<3):
                 acceso = 0 
             case 5:
                 salir()
-                intentos = 4 
-        case_:
-        print 
-        
+                intentos = 4
+            case _:
+                print("Opción no válida.")
+
         break
 
     else:
@@ -151,3 +151,4 @@ if intentos == 3:
 
 elif intentos == 4:
     print("Saliendo del sistema...")
+ 
