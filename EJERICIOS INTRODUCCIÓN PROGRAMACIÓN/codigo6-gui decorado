@@ -1,0 +1,179 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# ================= FUNCIONES =================
+
+def tablas_for(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    for i in range(tablaInicial, tablaFinal + 1):
+        resultado += f"\n🟣 TABLA DEL {i}\n"
+        for j in range(limiteInferior, limiteSuperior + 1):
+            resultado += f"  {i} × {j} = {i*j}\n"
+    return resultado
+
+
+def tablas_while(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    limiteInferiorTmp = limiteInferior
+
+    while tablaInicial <= tablaFinal:
+        resultado += f"\n🟣 TABLA DEL {tablaInicial}\n"
+        while limiteInferior <= limiteSuperior:
+            resultado += f"  {tablaInicial} × {limiteInferior} = {tablaInicial * limiteInferior}\n"
+            limiteInferior += 1
+
+        limiteInferior = limiteInferiorTmp
+        tablaInicial += 1
+
+    return resultado
+
+
+def tablas_dowhile(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    i = tablaInicial
+
+    while True:
+        resultado += f"\n🟣 TABLA DEL {i}\n"
+        j = limiteInferior
+
+        while True:
+            resultado += f"  {i} × {j} = {i*j}\n"
+            j += 1
+            if j > limiteSuperior:
+                break
+
+        i += 1
+        if i > tablaFinal:
+            break
+
+    return resultado
+
+
+# ================= LOGICA =================
+
+def ejecutar():
+    try:
+        tablaInicial = int(entry_tabla_inicial.get())
+        tablaFinal = int(entry_tabla_final.get())
+        limiteInferior = int(entry_lim_inf.get())
+        limiteSuperior = int(entry_lim_sup.get())
+
+        if not (tablaInicial > 0 and tablaFinal > 0 and tablaInicial < tablaFinal):
+            messagebox.showerror("Error", "Tablas inválidas")
+            return
+
+        if not (limiteInferior > 0 and limiteSuperior > 0 and limiteInferior < limiteSuperior):
+            messagebox.showerror("Error", "Límites inválidos")
+            return
+
+        opcion = opcion_var.get()
+
+        if opcion == 1:
+            resultado = tablas_for(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        elif opcion == 2:
+            resultado = tablas_while(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        elif opcion == 3:
+            resultado = tablas_dowhile(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        else:
+            messagebox.showerror("Error", "Selecciona método")
+            return
+
+        text_resultado.config(state="normal")
+        text_resultado.delete(1.0, tk.END)
+        text_resultado.insert(tk.END, resultado)
+        text_resultado.config(state="disabled")
+
+    except ValueError:
+        messagebox.showerror("Error", "Solo números válidos")
+
+
+def limpiar():
+    entry_tabla_inicial.delete(0, tk.END)
+    entry_tabla_final.delete(0, tk.END)
+    entry_lim_inf.delete(0, tk.END)
+    entry_lim_sup.delete(0, tk.END)
+    text_resultado.config(state="normal")
+    text_resultado.delete(1.0, tk.END)
+    text_resultado.config(state="disabled")
+
+
+# ================= UI =================
+
+ventana = tk.Tk()
+ventana.title("Calculadora de Tablas PRO")
+ventana.geometry("650x700")
+ventana.config(bg="#0f0f1a")
+
+# CONTENEDOR
+frame = tk.Frame(ventana, bg="#0f0f1a")
+frame.pack(pady=20)
+
+# TITULO
+tk.Label(frame, text="✨ TABLAS DE MULTIPLICAR", 
+         font=("Segoe UI", 18, "bold"), 
+         fg="#c084fc", bg="#0f0f1a").grid(row=0, column=0, columnspan=2, pady=10)
+
+# FUNCION INPUT BONITO
+def crear_input(texto, row):
+    tk.Label(frame, text=texto, fg="white", bg="#0f0f1a",
+             font=("Segoe UI", 10)).grid(row=row, column=0, sticky="w", pady=5)
+
+    entry = tk.Entry(frame, font=("Segoe UI", 11),
+                     bg="#1a1a2e", fg="white", insertbackground="white",
+                     relief="flat", width=20)
+    entry.grid(row=row, column=1, pady=5, ipady=5)
+    return entry
+
+entry_tabla_inicial = crear_input("Tabla inicial:", 1)
+entry_tabla_final = crear_input("Tabla final:", 2)
+entry_lim_inf = crear_input("Límite inferior:", 3)
+entry_lim_sup = crear_input("Límite superior:", 4)
+
+# OPCIONES
+opcion_var = tk.IntVar()
+
+tk.Label(frame, text="Método:", fg="white", bg="#0f0f1a").grid(row=5, column=0, pady=10)
+
+radio_frame = tk.Frame(frame, bg="#0f0f1a")
+radio_frame.grid(row=5, column=1)
+
+for text, val in [("FOR",1),("WHILE",2),("DO WHILE",3)]:
+    tk.Radiobutton(radio_frame, text=text, variable=opcion_var, value=val,
+                   bg="#0f0f1a", fg="white", selectcolor="#6d28d9",
+                   font=("Segoe UI", 9)).pack(side="left", padx=5)
+
+# BOTONES
+btn_frame = tk.Frame(ventana, bg="#0f0f1a")
+btn_frame.pack(pady=10)
+
+tk.Button(btn_frame, text="▶ Ejecutar", command=ejecutar,
+          bg="#7c3aed", fg="white", font=("Segoe UI", 10, "bold"),
+          relief="flat", padx=15, pady=5).pack(side="left", padx=10)
+
+tk.Button(btn_frame, text="🧹 Limpiar", command=limpiar,
+          bg="#374151", fg="white", font=("Segoe UI", 10),
+          relief="flat", padx=15, pady=5).pack(side="left", padx=10)
+
+# AREA RESULTADO CON SCROLL
+frame_resultado = tk.Frame(ventana)
+frame_resultado.pack(pady=10)
+
+scroll = tk.Scrollbar(frame_resultado)
+scroll.pack(side="right", fill="y")
+
+text_resultado = tk.Text(frame_resultado, height=20, width=70,
+                         bg="#020617", fg="#e5e7eb",
+                         font=("Consolas", 10),
+                         yscrollcommand=scroll.set)
+
+text_resultado.pack()
+scroll.config(command=text_resultado.yview)
+
+text_resultado.config(state="disabled")
+
+# FOOTER
+tk.Label(ventana, text="💜 Modo oscuro activado", 
+         fg="#6d28d9", bg="#0f0f1a",
+         font=("Segoe UI", 8)).pack(pady=5)
+
+ventana.mainloop()

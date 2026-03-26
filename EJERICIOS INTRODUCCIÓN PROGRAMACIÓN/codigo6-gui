@@ -1,0 +1,126 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# FUNCIONES
+def tablas_for(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    for i in range(tablaInicial, tablaFinal + 1):
+        resultado += f"\nTABLA DEL {i}\n"
+        for j in range(limiteInferior, limiteSuperior + 1):
+            resultado += f"{i} X {j} = {i * j}\n"
+    return resultado
+
+
+def tablas_while(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    limiteInferiorTmp = limiteInferior
+
+    while tablaInicial <= tablaFinal:
+        resultado += f"\nTABLA DEL {tablaInicial}\n"
+
+        while limiteInferior <= limiteSuperior:
+            resultado += f"{tablaInicial} X {limiteInferior} = {tablaInicial * limiteInferior}\n"
+            limiteInferior += 1
+
+        limiteInferior = limiteInferiorTmp
+        tablaInicial += 1
+
+    return resultado
+
+
+def tablas_dowhile(tablaInicial, tablaFinal, limiteInferior, limiteSuperior):
+    resultado = ""
+    i = tablaInicial
+
+    while True:
+        resultado += f"\nTABLA DEL {i}\n"
+
+        j = limiteInferior
+        while True:
+            resultado += f"{i} X {j} = {i * j}\n"
+            j += 1
+            if j > limiteSuperior:
+                break
+
+        i += 1
+        if i > tablaFinal:
+            break
+
+    return resultado
+
+
+# FUNCION PRINCIPAL GUI
+def ejecutar():
+    try:
+        tablaInicial = int(entry_tabla_inicial.get())
+        tablaFinal = int(entry_tabla_final.get())
+        limiteInferior = int(entry_lim_inf.get())
+        limiteSuperior = int(entry_lim_sup.get())
+
+        # VALIDACIONES
+        if not (tablaInicial > 0 and tablaFinal > 0 and tablaInicial < tablaFinal):
+            messagebox.showerror("Error", "Tablas deben ser positivas y tablaInicial < tablaFinal")
+            return
+
+        if not (limiteInferior > 0 and limiteSuperior > 0 and limiteInferior < limiteSuperior):
+            messagebox.showerror("Error", "Límites deben ser positivos y limiteInferior < limiteSuperior")
+            return
+
+        opcion = opcion_var.get()
+
+        if opcion == 1:
+            resultado = tablas_for(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        elif opcion == 2:
+            resultado = tablas_while(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        elif opcion == 3:
+            resultado = tablas_dowhile(tablaInicial, tablaFinal, limiteInferior, limiteSuperior)
+        else:
+            messagebox.showerror("Error", "Selecciona una opción")
+            return
+
+        text_resultado.delete(1.0, tk.END)
+        text_resultado.insert(tk.END, resultado)
+
+    except ValueError:
+        messagebox.showerror("Error", "Ingresa solo números válidos")
+
+
+# VENTANA
+ventana = tk.Tk()
+ventana.title("Tablas de Multiplicar")
+ventana.geometry("500x600")
+
+# INPUTS
+tk.Label(ventana, text="Tabla Inicial").pack()
+entry_tabla_inicial = tk.Entry(ventana)
+entry_tabla_inicial.pack()
+
+tk.Label(ventana, text="Tabla Final").pack()
+entry_tabla_final = tk.Entry(ventana)
+entry_tabla_final.pack()
+
+tk.Label(ventana, text="Límite Inferior").pack()
+entry_lim_inf = tk.Entry(ventana)
+entry_lim_inf.pack()
+
+tk.Label(ventana, text="Límite Superior").pack()
+entry_lim_sup = tk.Entry(ventana)
+entry_lim_sup.pack()
+
+# OPCIONES
+opcion_var = tk.IntVar()
+
+tk.Label(ventana, text="Selecciona método").pack()
+tk.Radiobutton(ventana, text="FOR", variable=opcion_var, value=1).pack()
+tk.Radiobutton(ventana, text="WHILE", variable=opcion_var, value=2).pack()
+tk.Radiobutton(ventana, text="DO WHILE", variable=opcion_var, value=3).pack()
+
+# BOTON
+tk.Button(ventana, text="Ejecutar", command=ejecutar).pack()
+
+# RESULTADO
+text_resultado = tk.Text(ventana, height=20)
+text_resultado.pack()
+
+# EJECUCION
+ventana.mainloop()
