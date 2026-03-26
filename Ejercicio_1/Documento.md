@@ -19,7 +19,7 @@ python --version
 <img width="573" height="42" alt="image" src="https://github.com/user-attachments/assets/66c00ac7-d568-48ac-b950-bc12dff305d3" />
 
 
-## 🪜 Pasos para crear un entorno virtual
+##  Pasos para crear un entorno virtual
 
 ### 📂 Paso 1: Entrar a la carpeta del proyecto
 
@@ -34,7 +34,7 @@ cd ProyectoPython
 Este paso es importante porque el entorno virtual se creará **dentro de esta carpeta**.
 
 
-### 🧱 Paso 2: Crear el entorno virtual
+### Paso 2: Crear el entorno virtual
 
 Una vez dentro de la carpeta del proyecto, ejecuta el siguiente comando:
 
@@ -53,7 +53,7 @@ En esta carpeta se guardan Python y las librerías del proyecto.
 
 ---
 
-### ▶️ Paso 3: Activar el entorno virtual
+###  Paso 3: Activar el entorno virtual
 
 Para activar el entorno virtual, escribe:
 
@@ -71,7 +71,7 @@ antes de la ruta en la terminal.
 
 ---
 
-### 📦 Paso 4: Instalar librerías
+###  Paso 4: Instalar librerías
 
 Con el entorno virtual activo, las librerías que se instalen solo afectarán a este proyecto.
 
@@ -105,7 +105,7 @@ python main.py
 
 ---
 
-### 📄 Paso 6: Evitar subir el entorno virtual a GitHub
+###  Paso 6: Evitar subir el entorno virtual a GitHub
 
 El entorno virtual no debe subirse al repositorio. Para ello, crea un archivo `.gitignore` y agrega:
 
